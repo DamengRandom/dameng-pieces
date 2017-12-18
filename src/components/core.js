@@ -203,9 +203,15 @@ class HomePageFooter extends React.Component {
           </GridTile>
           <GridTile style={muiTheme.footerTileTwo}>
             <h4 style={muiTheme.footerSubtitle}>About Me</h4>
-            <a style={muiTheme.footerTileFirstLink} href="https://github.com/DamengRandom"><i className="fa fa-github" aria-hidden="true"></i></a>
-            <a style={muiTheme.footerTileLink} href="mailto:damonwu0605@gmail.com"><i className="fa fa-envelope" aria-hidden="true"></i></a>
-            <a onClick={this.handleOpen} style={muiTheme.footerTileLastLink}><i className="fa fa-weixin" aria-hidden="true"></i></a>
+            <a style={muiTheme.footerTileFirstLink} href="https://github.com/DamengRandom">
+              <i className="fa fa-github" aria-hidden="true"></i>
+            </a>
+            <a style={muiTheme.footerTileLink} href="mailto:damonwu0605@gmail.com">
+              <i className="fa fa-envelope" aria-hidden="true"></i>
+            </a>
+            <a onClick={this.handleOpen} style={muiTheme.footerTileLastLink}>
+              <i className="fa fa-weixin" aria-hidden="true"></i>
+            </a>
           </GridTile>
         </GridList>
           <Dialog

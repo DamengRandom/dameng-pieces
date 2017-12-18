@@ -1,15 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'; 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import * as Colors from 'material-ui/styles/colors';
-import Dialog from 'material-ui/Dialog';
-import { GridList, GridTile } from 'material-ui/GridList';
-import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import Subheader from 'material-ui/Subheader';
 // components
-import AddCost from './addCost';
 import CostDetails from './costDetails';
 
 const muiTheme = getMuiTheme({
@@ -17,19 +12,40 @@ const muiTheme = getMuiTheme({
 });
 
 class Costs extends React.Component {
+  constructor(props){
+    super(props);
+  }
+  renderCosts(){
+    return this.props.costs.map((cost) => {
+      return <CostDetails key={cost.id} cost={cost} />
+    })
+  }
   render(){
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
           <h4>Cost Headaches</h4>
           <RaisedButton label="Add New Cost"
-            containerElement={<Link to="/addcost" />}
+            containerElement={<Link to="/add-cost" />}
             primary={true}>
           </RaisedButton>
+        { this.renderCosts() }
         </div>
       </MuiThemeProvider>
     )
   }
 }
 
-export default Costs;
+const mapStateToProps = (state) => {
+  return {
+    costs: state.costs
+  }
+}
+
+export default connect(mapStateToProps)(Costs);
+
+
+// <RaisedButton label="Details"
+// containerElement={<Link to="/cost-details/1" />}
+// primary={true}>
+// </RaisedButton>
