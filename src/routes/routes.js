@@ -28,7 +28,7 @@ class Routes extends React.Component {
           <Route exact path="/signup" component={Signup} history={history}></Route>
           <Route exact path="/words" component={Words} history={history}></Route>
           <Route exact path="/add-cost" component={AddCost} history={history}></Route>
-          <Route exact path="/edit-cost" component={EditCost} history={history}></Route>
+          <Route exact path="/edit-cost/:id" component={EditCost} history={history}></Route>
           <Route exact path="/cost-details/:id" component={CostDetails} history={history}></Route>
         </div>
       </Router>

@@ -7,11 +7,12 @@ import moment from 'moment';
 class CostForm extends React.Component {
   constructor(props){
     super(props);
+    console.log("cost read from store: ", props.cost);
     this.state = {
-      costTitle: props.costTitle || '',
-      costAmount: props.costAmount || 0,
-      costNote: props.costNote || '',
-      costDate: moment(props.costDate) || moment()
+      costTitle: props.cost? props.cost.costTitle : '',
+      costAmount: props.cost ? props.cost.costAmount : 0,
+      costNote: props.cost ? props.cost.costNote : '',
+      costDate: props.cost ? moment(props.cost.costDate) : moment()
     }
     this.getCostTitle = this.getCostTitle.bind(this);
     this.getCostAmount = this.getCostAmount.bind(this);
@@ -44,17 +45,10 @@ class CostForm extends React.Component {
     e.preventDefault();
     this.props.onSubmit({
       costTitle: this.state.costTitle,
-      costAmount: parseInt(this.state.costAmount),
+      costAmount: parseFloat(this.state.costAmount) ? parseFloat(this.state.costAmount) : parseFloat(this.state.costAmount),
       costNote: this.state.costNote,
       costDate: moment(this.state.costDate).format('L')
     });
-    // const data = {
-    //   costTitle: this.state.costTitle,
-    //   costAmount: parseInt(this.state.costAmount),
-    //   costNote: this.state.costNote,
-    //   costDate: moment(this.state.costDate).format('L')
-    // }
-    // console.log("received data", data);
   }
   render(){
     return (
@@ -85,9 +79,9 @@ class CostForm extends React.Component {
           onChange={this.getCostDate}
           value={this.state.costDate} />
         <br/>
-        <RaisedButton label="Generate" type="submit"
-          primary={true}>
-        </RaisedButton>
+        {
+          !this.props.cost ? <RaisedButton label="Generate" type="submit" primary={true}></RaisedButton> : <RaisedButton label="Update" type="submit" primary={true}></RaisedButton>
+        }
       </form>
     )
   }

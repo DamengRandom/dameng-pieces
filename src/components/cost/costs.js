@@ -16,9 +16,14 @@ class Costs extends React.Component {
     super(props);
   }
   renderCosts(){
-    return this.props.costs.map((cost) => {
-      return <CostDetails key={cost.id} cost={cost} />
-    })
+    if(this.props.costs){
+      return this.props.costs.map((cost) => {
+        return <CostDetails key={cost.id} cost={cost} />
+      })
+    }
+    else {
+      return <p>No Cost For Now ..</p>
+    }
   }
   render(){
     return (
@@ -43,9 +48,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(Costs);
-
-
-// <RaisedButton label="Details"
-// containerElement={<Link to="/cost-details/1" />}
-// primary={true}>
-// </RaisedButton>

@@ -46,11 +46,7 @@ class CostDetails extends React.Component {
             <span>{ this.props.cost.costNote }</span>
             <span>{ this.props.cost.costDate }</span>
             <RaisedButton icon={<FontIcon className="material-icons">edit</FontIcon>}
-              containerElement={<Link to="/edit-cost" />} 
-              style={muiTheme.costDetailButtons}
-              primary={true}>
-            </RaisedButton>
-            <RaisedButton icon={<FontIcon className="material-icons">delete</FontIcon>}
+              containerElement={<Link to={"/edit-cost/"+this.props.cost.id} />} 
               style={muiTheme.costDetailButtons}
               primary={true}>
             </RaisedButton>
@@ -62,71 +58,3 @@ class CostDetails extends React.Component {
 }
 
 export default connect()(CostDetails);
-
-// <Table>
-// <TableHeader>
-//   <TableRow>
-//     <TableHeaderColumn>Title</TableHeaderColumn>
-//     <TableHeaderColumn>Amount</TableHeaderColumn>
-//     <TableHeaderColumn>Note</TableHeaderColumn>
-//     <TableHeaderColumn>Date</TableHeaderColumn>
-//     <TableHeaderColumn>Actions</TableHeaderColumn>
-//   </TableRow>
-// </TableHeader>
-// <TableBody>
-//   <TableRow>
-//     <TableRowColumn>{ this.props.cost.costTitle }</TableRowColumn>
-//     <TableRowColumn>{ this.props.cost.costAmount }</TableRowColumn>
-//     <TableRowColumn>{ this.props.cost.costNote }</TableRowColumn>
-//     <TableRowColumn>{ this.props.cost.costDate }</TableRowColumn>
-//     <TableRowColumn>
-//       <RaisedButton icon={<FontIcon className="material-icons">last_page</FontIcon>}
-//         containerElement={<Link to="/costs" />}
-//         style={muiTheme.costDetailButtons}
-//         primary={true}>
-//       </RaisedButton>
-//       <RaisedButton icon={<FontIcon className="material-icons">edit</FontIcon>}
-//         containerElement={<Link to="/edit-cost" />} 
-//         style={muiTheme.costDetailButtons}
-//         primary={true}>
-//       </RaisedButton>
-//       <RaisedButton icon={<FontIcon className="material-icons">delete</FontIcon>}
-//         style={muiTheme.costDetailButtons}
-//         primary={true}>
-//       </RaisedButton>
-//     </TableRowColumn>
-//   </TableRow>
-// </TableBody>
-// </Table>
-
-// <table>
-//   <tr>
-//     <th>Title</th>
-//     <th>Last Name</th>
-//     <th>Note</th>
-//     <th>Date</th>
-//     <th>Actions</th>
-//   </tr>
-//   <tr>
-//     <td>{ this.props.cost.costTitle }</td>
-//     <td>{ this.props.cost.costAmount }</td>
-//     <td>{ this.props.cost.costNote }</td>
-//     <td>{ this.props.cost.costDate }</td>
-//     <td>
-//       <RaisedButton icon={<FontIcon className="material-icons">last_page</FontIcon>}
-//         containerElement={<Link to="/costs" />}
-//         style={muiTheme.costDetailButtons}
-//         primary={true}>
-//       </RaisedButton>
-//       <RaisedButton icon={<FontIcon className="material-icons">edit</FontIcon>}
-//         containerElement={<Link to="/edit-cost" />} 
-//         style={muiTheme.costDetailButtons}
-//         primary={true}>
-//       </RaisedButton>
-//       <RaisedButton icon={<FontIcon className="material-icons">delete</FontIcon>}
-//         style={muiTheme.costDetailButtons}
-//         primary={true}>
-//       </RaisedButton>
-//     </td>
-//   </tr>
-//   </table>
