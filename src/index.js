@@ -7,6 +7,8 @@ import registerServiceWorker from './registerServiceWorker';
 import configureStore from './store/configureStore';
 // import routes
 import Routes from './routes/routes';
+// import actions
+import { startSetCosts } from './actions/costs';
 
 const store = configureStore();
 
@@ -16,6 +18,9 @@ const Output = (
   </Provider>
 );
 
-ReactDOM.render(Output, document.getElementById('root'));
+ReactDOM.render(<p>Loading ..</p>, document.getElementById('root'));
+store.dispatch(startSetCosts()).then(() => {
+  ReactDOM.render(Output, document.getElementById('root'));  
+})
 
 registerServiceWorker();

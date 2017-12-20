@@ -17,6 +17,8 @@ export default (state = costDefaultState, action) => {
       });
     case 'REMOVE_COST':
       return state.filter(({costId}) => costId !== action.id);
+    case 'SET_COSTS':
+      return action.costs
     default: 
       return state;
   }

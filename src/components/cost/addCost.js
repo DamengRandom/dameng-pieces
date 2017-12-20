@@ -6,7 +6,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import RaisedButton from 'material-ui/RaisedButton';
 
 // actions
-import { addCost } from '../../actions/costs';
+import { addCost, startAddCost } from '../../actions/costs';
 
 // components
 import CostForm from './costForm';
@@ -17,6 +17,10 @@ const muiTheme = getMuiTheme({
 });
 
 class AddCost extends React.Component {
+  onSubmit = (cost) => {
+    this.props.startAddCost(cost);
+    this.props.history.push('/costs');
+  }
   render(){
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -25,15 +29,23 @@ class AddCost extends React.Component {
             containerElement={<Link to="/costs" />}
             primary={true}>
           </RaisedButton>
-          <CostForm onSubmit={(cost) => {
-            this.props.dispatch(addCost(cost));
-            console.log('cost: ', cost);
-            this.props.history.push('/costs');
-          }} />  
+          <CostForm onSubmit={this.onSubmit} />
         </div>
       </MuiThemeProvider>
     )
   }
 }
 
-export default connect()(AddCost);
+// <CostForm onSubmit={(cost) => {
+//   // this.props.dispatch(addCost(cost));
+//   // this.props.dispatch(startAddCost(cost));
+//   this.props.startAddCost(cost);
+//   console.log('cost: ', cost);
+//   this.props.history.push('/costs');
+// }} /> 
+
+const mapDispatchToProps = (dispatch) => ({
+  startAddCost: (cost) => dispatch(startAddCost(cost))
+});
+
+export default connect(undefined, mapDispatchToProps)(AddCost);
