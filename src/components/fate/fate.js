@@ -1,12 +1,8 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import * as Colors from 'material-ui/styles/colors';
-import Dialog from 'material-ui/Dialog';
-import { GridList, GridTile } from 'material-ui/GridList';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import Subheader from 'material-ui/Subheader';
 import {
   Step,
   Stepper,
@@ -243,7 +239,7 @@ export default class Fate extends React.Component {
             finished && (
               <div style={muiTheme.fateRepeatOptionsLayout}>
                 <p style={muiTheme.fateRepeatOptions}>
-                  <a href="#"
+                  <a href="###"
                     onClick={(event) => {
                       event.preventDefault();
                       this.setState({stepIndex: 0, finished: false, outputs: [], rollCount: -1});
@@ -251,7 +247,7 @@ export default class Fate extends React.Component {
                 </p>
                 <p style={muiTheme.fateRepeatOR}>OR</p>
                 <p style={muiTheme.fateRepeatOptions}>
-                  <a href="#"
+                  <a href="###"
                     onClick={(event) => {
                       event.preventDefault();
                       localStorage.removeItem('options');

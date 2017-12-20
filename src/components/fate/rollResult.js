@@ -1,12 +1,9 @@
 import React from "react";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import * as Colors from 'material-ui/styles/colors';
 import Dialog from 'material-ui/Dialog';
-import { GridList, GridTile } from 'material-ui/GridList';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
-import Subheader from 'material-ui/Subheader';
+
 const muiTheme = getMuiTheme({
   resultLayout: {
     textAlign: 'right',

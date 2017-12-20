@@ -119,7 +119,7 @@ class NavMenu extends React.Component {
                 <FontIcon className="material-icons">live_help</FontIcon>
               }>
             </MenuItem>
-            <MenuItem containerElement={<Link to="costs" />}
+            <MenuItem containerElement={<Link to="/costs" />}
               onClick={this.handleClose}
               primaryText="Daily Costs"
               style={menuItemStyle}
