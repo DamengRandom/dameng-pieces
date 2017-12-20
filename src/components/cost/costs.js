@@ -18,7 +18,7 @@ class Costs extends React.Component {
   renderCosts(){
     if(this.props.costs){
       return this.props.costs.map((cost) => {
-        return <CostDetails key={cost.id} cost={cost} />
+        return <CostDetails key={cost.costId} cost={cost} />
       })
     }
     else {

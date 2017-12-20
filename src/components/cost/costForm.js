@@ -3,13 +3,15 @@ import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import moment from 'moment';
+import { firebaseApp } from '../../services/firebase';
+import uuid from 'uuid';
 
 class CostForm extends React.Component {
   constructor(props){
     super(props);
     console.log("cost read from store: ", props.cost);
     this.state = {
-      costTitle: props.cost? props.cost.costTitle : '',
+      costTitle: props.cost ? props.cost.costTitle : '',
       costAmount: props.cost ? props.cost.costAmount : 0,
       costNote: props.cost ? props.cost.costNote : '',
       costDate: props.cost ? moment(props.cost.costDate) : moment()
@@ -41,14 +43,21 @@ class CostForm extends React.Component {
     const formattedDate = moment(date).format('L'); 
     this.setState({ costDate: date });
   }
+  // add data into store (state management)
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.onSubmit({
+    let costData = {
+      costId: uuid(),
       costTitle: this.state.costTitle,
       costAmount: parseFloat(this.state.costAmount) ? parseFloat(this.state.costAmount) : parseFloat(this.state.costAmount),
       costNote: this.state.costNote,
       costDate: moment(this.state.costDate).format('L')
-    });
+    }
+    this.props.onSubmit(costData);
+    // add data into firebase 
+    const firebaseCostsData = firebaseApp.database().ref('costs');
+    firebaseCostsData.push(costData);
+    // this.setState({ costs:  });
   }
   render(){
     return (

@@ -1,6 +1,7 @@
 import uuid from 'uuid';
 
 export const addCost = ({ 
+    costId = null,
     costTitle = null, 
     costAmount = 0,
     costNote = null,
@@ -10,6 +11,7 @@ export const addCost = ({
       type: 'ADD_COST',
       cost: {
         id: uuid(),
+        costId: uuid(),
         costTitle, 
         costAmount,
         costNote,

@@ -40,17 +40,15 @@ class CostDetails extends React.Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div style={muiTheme.root}>
-          <GridList style={muiTheme.gridList} cols={2.2}>
-            <span>{ this.props.cost.costTitle }</span>
-            <span>{ this.props.cost.costAmount }</span>
-            <span>{ this.props.cost.costNote }</span>
-            <span>{ this.props.cost.costDate }</span>
-            <RaisedButton icon={<FontIcon className="material-icons">edit</FontIcon>}
-              containerElement={<Link to={"/edit-cost/"+this.props.cost.id} />} 
-              style={muiTheme.costDetailButtons}
-              primary={true}>
-            </RaisedButton>
-          </GridList>
+          <span>{ this.props.cost.costTitle }</span>
+          <span>{ this.props.cost.costAmount }</span>
+          <span>{ this.props.cost.costNote }</span>
+          <span>{ this.props.cost.costDate }</span>
+          <RaisedButton icon={<FontIcon className="material-icons">edit</FontIcon>}
+            containerElement={<Link to={"/edit-cost/"+this.props.cost.costId} />} 
+            style={muiTheme.costDetailButtons}
+            primary={true}>
+          </RaisedButton>
         </div>
       </MuiThemeProvider>
     )

@@ -49,7 +49,7 @@ class EditCost extends React.Component {
 const mapStateToProps = (state, props) => {
   return {
     cost: state.costs.find((cost) => {
-      return cost.id === props.match.params.id
+      return cost.costId === props.match.params.id
     })
   }
 }
