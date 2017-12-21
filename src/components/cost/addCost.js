@@ -36,16 +36,8 @@ class AddCost extends React.Component {
   }
 }
 
-// <CostForm onSubmit={(cost) => {
-//   // this.props.dispatch(addCost(cost));
-//   // this.props.dispatch(startAddCost(cost));
-//   this.props.startAddCost(cost);
-//   console.log('cost: ', cost);
-//   this.props.history.push('/costs');
-// }} /> 
-
 const mapDispatchToProps = (dispatch) => ({
-  startAddCost: (cost) => dispatch(startAddCost(cost))
+  startAddCost: (cost) => dispatch(startAddCost(cost)) // aynsc action to get the a new cost record
 });
 
 export default connect(undefined, mapDispatchToProps)(AddCost);

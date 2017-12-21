@@ -1,9 +1,9 @@
 This project was created with React + Firebase
 
 ## Main functions: 
-- [Fate Tiny App ](#fate-your-decision)
-- [Cost Tiny App ](#record-your-expenses)
-- [???](#still-discovering)
+- [Fate Tiny App: fate-your-decision](#fate-your-decision)
+- [Cost Tiny App: record-your-expenses](#record-your-expenses)
+- [???: still-discovering](#still-discovering)
 
 ## Here is the test setup: 
 
@@ -11,9 +11,9 @@ This project was created with React + Firebase
 
 ## How to run this app:
 
-1. Please run ### `npm install` to install the packages
+1. Please run `npm install` to install the packages
 
-2. Please run ### `yarn start` to run the project 
+2. Please run `yarn start` to run the project 
 
 
 Thank you for viewing ...

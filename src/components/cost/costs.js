@@ -16,14 +16,9 @@ class Costs extends React.Component {
     super(props);
   }
   renderCosts(){
-    if(this.props.costs){
-      return this.props.costs.map((cost) => {
-        return <CostDetails key={cost.costId} cost={cost} />
-      })
-    }
-    else {
-      return <p>No Cost For Now ..</p>
-    }
+    return this.props.costs.map((cost) => { // render each of cost record 
+      return <CostDetails key={cost.costId} cost={cost} />
+    })
   }
   render(){
     return (
@@ -34,7 +29,7 @@ class Costs extends React.Component {
             containerElement={<Link to="/add-cost" />}
             primary={true}>
           </RaisedButton>
-        { this.renderCosts() }
+        { this.props.costs.length !== 0 ? this.renderCosts() : <p>No Cost Record For Now ..</p> }
         </div>
       </MuiThemeProvider>
     )
@@ -43,7 +38,7 @@ class Costs extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    costs: state.costs
+    costs: state.costs // retrieve all the costs data from store
   }
 }
 

@@ -1,26 +1,6 @@
 import uuid from 'uuid';
 import { firebaseApp } from '../services/firebase';
 
-// export const addCost = ({ 
-//     costId = null,
-//     costTitle = null, 
-//     costAmount = 0,
-//     costNote = null,
-//     costDate = null
-//   } = {}) => {
-//     return {
-//       type: 'ADD_COST',
-//       cost: {
-//         id: uuid(),
-//         costId: uuid(),
-//         costTitle, 
-//         costAmount,
-//         costNote,
-//         costDate
-//       }
-//     }
-// }
-
 export const addCost = (cost) => {
   return {
     type: 'ADD_COST',
@@ -28,7 +8,7 @@ export const addCost = (cost) => {
   }
 }
 
-// keep adding new costs into the store constantly
+// keep adding new costs into the store constantly (startAddCost: is called as action function)
 export const startAddCost = (costData = {}) => {
   return (dispatch) => {
     const {
@@ -48,6 +28,7 @@ export const startAddCost = (costData = {}) => {
   }
 }
 
+// edit cost data
 export const editCost = (id, updates) => {
   return {
     type: 'EDIT_COST',
@@ -64,6 +45,7 @@ export const startEditCost = (id, updates) => {
   }
 }
 
+// remove specific cost data
 export const removeCost = ({id} = {}) => {
   return {
     type: 'REMOVE_COST',
@@ -79,6 +61,7 @@ export const startRemoveCost = ({id} = {}) => {
   }
 }
 
+// load all costs data from store
 export const setCosts = (costs) => {
   return {
     type: 'SET_COSTS',
@@ -96,7 +79,6 @@ export const startSetCosts = () => {
           ...childSnapshot.val()
         })
       });
-      console.log("costs: ", costs);
       dispatch(setCosts(costs));
     });
   }

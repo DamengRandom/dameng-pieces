@@ -7,7 +7,7 @@ export default () => {
     combineReducers({
       costs: costReducer 
     }),
-    applyMiddleware(thunk)
+    applyMiddleware(thunk) // apply middleware for writing aynsc actions to get the latest state
   );
   return store;
 }

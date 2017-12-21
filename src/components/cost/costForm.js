@@ -9,7 +9,6 @@ import uuid from 'uuid';
 class CostForm extends React.Component {
   constructor(props){
     super(props);
-    console.log("cost read from store: ", props.cost);
     this.state = {
       costTitle: props.cost ? props.cost.costTitle : '',
       costAmount: props.cost ? props.cost.costAmount : 0,
@@ -24,7 +23,7 @@ class CostForm extends React.Component {
   }
   getCostTitle = (event) => {
     const costTitle = event.target.value;
-    // this.setState({ costTitle });
+    // this.setState({ costTitle }); // secodn way of writing setState cost title
     this.setState(() => {
       return {
         costTitle
@@ -54,9 +53,6 @@ class CostForm extends React.Component {
       costDate: moment(this.state.costDate).format('L')
     }
     this.props.onSubmit(costData);
-    // add data into firebase 
-    // const firebaseCostsData = firebaseApp.database().ref('costs');
-    // firebaseCostsData.push(costData);
   }
   render(){
     return (
