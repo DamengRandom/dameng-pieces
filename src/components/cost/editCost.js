@@ -9,7 +9,7 @@ import FontIcon from 'material-ui/FontIcon';
 // components 
 import CostForm from './costForm';
 //actions
-import { editCost, startEditCost, removeCost, startRemoveCost } from '../../actions/costs';
+import { startEditCost, startRemoveCost } from '../../actions/costs';
 
 const muiTheme = getMuiTheme({
   
@@ -51,12 +51,12 @@ class EditCost extends React.Component {
 const mapStateToProps = (state, props) => {
   return {
     cost: state.costs.find((cost) => {
-      return cost.id === props.match.params.id
+      return cost.id === props.match.params.id // find the data inside store which id is same with url id value 
     })
   }
 }
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = (dispatch, props) => { // aynsc actions to trigger state change and send updated data to store
   return {  
     startEditCost: (id, data) => dispatch(startEditCost(id, data)),
     startRemoveCost: (data) => dispatch(startRemoveCost(data))

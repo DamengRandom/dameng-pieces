@@ -27,8 +27,7 @@ class CostDetails extends React.Component {
     super(props);
   }
   render(){
-    console.log("data: ", this.props);
-    return (
+    return ( // load single cost record 
       <MuiThemeProvider muiTheme={muiTheme}>
         <div style={muiTheme.root}>
           <span>{ this.props.cost.costTitle }</span>
