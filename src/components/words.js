@@ -3,7 +3,7 @@ export default class Words extends React.Component {
   render(){
     return (
       <div>
-        Under construction ...
+        <h3>Under construction ...</h3>
       </div>
     );
   }
