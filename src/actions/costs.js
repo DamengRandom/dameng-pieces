@@ -39,8 +39,9 @@ export const startAddCost = (costData = {}) => {
       costDate = null
     } = costData;
     const eachCost = { costId: uuid(), costTitle, costAmount, costNote, costDate }
-    firebaseApp.database().ref('costs').push(eachCost).then(() => {
+    firebaseApp.database().ref('costs').push(eachCost).then((snapshot) => {
       dispatch(addCost({
+        id: snapshot.key,
         ...eachCost
       }));
     });
@@ -55,10 +56,26 @@ export const editCost = (id, updates) => {
   }
 }
 
-export const removeCost = (id) => {
+export const startEditCost = (id, updates) => {
+  return (dispatch) => {
+    return firebaseApp.database().ref(`costs/${id}`).update(updates).then(() => {
+      dispatch(editCost(id, updates));
+    })
+  }
+}
+
+export const removeCost = ({id} = {}) => {
   return {
     type: 'REMOVE_COST',
     id
+  }
+}
+
+export const startRemoveCost = ({id} = {}) => {
+  return (dispatch) => {
+    return firebaseApp.database().ref(`costs/${id}`).remove().then(() => {
+      dispatch(removeCost({id}))
+    })
   }
 }
 
@@ -74,7 +91,10 @@ export const startSetCosts = () => {
     return firebaseApp.database().ref('costs').once('value').then((snapshot) => {
       const costs = [];
       snapshot.forEach((childSnapshot) => {
-        costs.push(childSnapshot.val())
+        costs.push({
+          id: childSnapshot.key,
+          ...childSnapshot.val()
+        })
       });
       console.log("costs: ", costs);
       dispatch(setCosts(costs));

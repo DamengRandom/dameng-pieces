@@ -9,7 +9,7 @@ import FontIcon from 'material-ui/FontIcon';
 // components 
 import CostForm from './costForm';
 //actions
-import { editCost, removeCost } from '../../actions/costs';
+import { editCost, startEditCost, removeCost, startRemoveCost } from '../../actions/costs';
 
 const muiTheme = getMuiTheme({
   
@@ -19,6 +19,14 @@ class EditCost extends React.Component {
   constructor(props){
     super(props);
     
+  }
+  onRemove = () => {
+    this.props.startRemoveCost({id: this.props.match.params.id});
+    this.props.history.push('/costs');
+  }
+  onUpdate = (cost) => {
+    this.props.startEditCost(this.props.match.params.id, cost);
+    this.props.history.push('/costs');
   }
   render(){
     return (
@@ -31,15 +39,9 @@ class EditCost extends React.Component {
           <RaisedButton icon={<FontIcon className="material-icons">delete</FontIcon>}
             style={muiTheme.costDetailButtons}
             primary={true}
-            onClick={() => {
-              this.props.dispatch(removeCost(this.props.match.params.id));
-              this.props.history.push('/costs');
-            }}>
+            onClick={this.onRemove}>
           </RaisedButton>
-          <CostForm onSubmit={(cost) => {
-            this.props.dispatch(editCost(this.props.match.params.id, cost));
-            this.props.history.push('/costs');
-          }} cost={this.props.cost} />
+          <CostForm onSubmit={this.onUpdate} cost={this.props.cost} />
         </div>
       </MuiThemeProvider>
     )
@@ -49,10 +51,17 @@ class EditCost extends React.Component {
 const mapStateToProps = (state, props) => {
   return {
     cost: state.costs.find((cost) => {
-      return cost.costId === props.match.params.id
+      return cost.id === props.match.params.id
     })
   }
 }
 
-export default connect(mapStateToProps)(EditCost);
+const mapDispatchToProps = (dispatch, props) => {
+  return {  
+    startEditCost: (id, data) => dispatch(startEditCost(id, data)),
+    startRemoveCost: (data) => dispatch(startRemoveCost(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditCost);
 

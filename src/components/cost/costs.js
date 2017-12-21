@@ -14,7 +14,6 @@ const muiTheme = getMuiTheme({
 class Costs extends React.Component {
   constructor(props){
     super(props);
-    console.log("can get costs? ", this.props.costs);
   }
   renderCosts(){
     if(this.props.costs){
@@ -43,7 +42,6 @@ class Costs extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("costs state? ", state);
   return {
     costs: state.costs
   }
