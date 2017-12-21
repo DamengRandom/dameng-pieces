@@ -3,15 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import {GridList, GridTile} from 'material-ui/GridList';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
 
@@ -45,7 +36,7 @@ class CostDetails extends React.Component {
           <span>{ this.props.cost.costNote }</span>
           <span>{ this.props.cost.costDate }</span>
           <RaisedButton icon={<FontIcon className="material-icons">edit</FontIcon>}
-            containerElement={<Link to={"/edit-cost/"+this.props.cost.costId} />} 
+            containerElement={<Link to={"/edit-cost/"+this.props.cost.id} />} 
             style={muiTheme.costDetailButtons}
             primary={true}>
           </RaisedButton>

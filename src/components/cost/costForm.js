@@ -14,7 +14,7 @@ class CostForm extends React.Component {
       costTitle: props.cost ? props.cost.costTitle : '',
       costAmount: props.cost ? props.cost.costAmount : 0,
       costNote: props.cost ? props.cost.costNote : '',
-      costDate: props.cost ? moment(props.cost.costDate) : moment()
+      costDate: props.cost ? moment(props.cost.costDate) : moment(),
     }
     this.getCostTitle = this.getCostTitle.bind(this);
     this.getCostAmount = this.getCostAmount.bind(this);
@@ -55,9 +55,8 @@ class CostForm extends React.Component {
     }
     this.props.onSubmit(costData);
     // add data into firebase 
-    const firebaseCostsData = firebaseApp.database().ref('costs');
-    firebaseCostsData.push(costData);
-    // this.setState({ costs:  });
+    // const firebaseCostsData = firebaseApp.database().ref('costs');
+    // firebaseCostsData.push(costData);
   }
   render(){
     return (
