@@ -2,6 +2,7 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import FlatButton from 'material-ui/FlatButton';
+import { GridList, GridTile } from 'material-ui/GridList';
 import RaisedButton from 'material-ui/RaisedButton';
 import {
   Step,
@@ -17,6 +18,16 @@ import Rolls from './rolls';
 import RollResult from './rollResult';
 
 const muiTheme = getMuiTheme({
+  rootLayout: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
+  gridList: {
+    width: 900,
+    height: 'auto',
+    overflowY: 'auto',
+  },
   rollInstructions: {
 
   },
@@ -188,75 +199,83 @@ export default class Fate extends React.Component {
     const {stepIndex, finished} = this.state;
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div style={{ maxWidth: '100%' }}>
-          <h3>What is Fate (Random Decision) App?</h3>
-          <p>Fate app is a app which is used for the case when you have no idea to make a decision for a thing, such as you don't know where to go for lunch, there are several places for you to choose, but it is really diffcult for you to choose which one, and in this time, you will need this app to help you to make the final decision.</p>
-          <Stepper activeStep={stepIndex} orientation='vertical'>
-            <Step>
-              <StepLabel>Please enter total times of rolling</StepLabel>
-              <StepContent>
-                <Rolls rollCount={this.handleGetRolls} />
-                { this.state.rollCount > 0 && <div>
-                    <p>Your total rolling times would be: {this.state.rollCount}. Please click 'NEXT' button to go next step ..</p>
-                  </div> }
-                { this.state.rollCount > 0 && this.renderStepActions(0) }
-              </StepContent>
-            </Step>
+        <div style={muiTheme.rootLayout}>
+          <GridList
+          cols={1}
+          cellHeight={'auto'}
+          padding={1}
+          style={muiTheme.gridList}>
+            <GridTile>
+              <h3 style={{ padding: '0 2%' }}>What is Fate (Random Decision) App?</h3>
+              <p style={{ padding: '0 2%' }}>Fate app is a app which is used for the case when you have no idea to make a decision for a thing, such as you don't know where to go for lunch, there are several places for you to choose, but it is really diffcult for you to choose which one, and in this time, you will need this app to help you to make the final decision.</p>
+              <Stepper activeStep={stepIndex} orientation='vertical'>
+                <Step>
+                  <StepLabel>Please enter total times of rolling</StepLabel>
+                  <StepContent>
+                    <Rolls rollCount={this.handleGetRolls} />
+                    { this.state.rollCount > 0 && <div>
+                        <p>Your total rolling times would be: {this.state.rollCount}. Please click 'NEXT' button to go next step ..</p>
+                      </div> }
+                    { this.state.rollCount > 0 && this.renderStepActions(0) }
+                  </StepContent>
+                </Step>
 
-            <Step>
-              <StepLabel>Please add some options for rolling</StepLabel>
-              <StepContent>
-                <div style={muiTheme.rollInstructions}>
-                  <p>Please follow the steps below: </p>
-                  <ol style={muiTheme.rollSteps}>
-                    <li>Step 1: Add new options (choices) you want to roll if you don't have any options inside list</li>
-                    <li>Step 2: Click 'ROLL' button to roll your fate decision if options list is not empty</li>
-                    <li>Step 3: Click the 'NEXT' button to view the fate result</li>
-                  </ol>
-                </div>
-                <AddOption handleAddOption={this.handleAddOption} />  
-                <div style={muiTheme.fateRollButtons}>
-                  <RaisedButton label="ROLL" primary={true} onClick={ this.handleFateOption } disabled={ this.disableRollButton() } style={muiTheme.fateRollButton} />
-                  <RaisedButton label="REMOVE ALL OPTIONS" primary={true} onClick={ this.removeAllOptions } disabled={ this.state.options.length === 0 } style={muiTheme.fateRemoveButton} />
-                </div>
-                <Options optionsData={this.state.options} handleRemoveSingleOption={this.handleRemoveSingleOption} />
-                { (this.state.options.length > 0 && this.state.rollCount <= 0) &&  <div>
-                    <p>Well done!! please click 'NEXT' button to view the final fate random decision ..</p>
-                  </div> }
-                { this.renderStepActions(1) }
-              </StepContent>
-            </Step>
+                <Step>
+                  <StepLabel>Please add some options for rolling</StepLabel>
+                  <StepContent>
+                    <div style={muiTheme.rollInstructions}>
+                      <p>Please follow the steps below: </p>
+                      <ol style={muiTheme.rollSteps}>
+                        <li>Step 1: Add new options (choices) you want to roll if you don't have any options inside list</li>
+                        <li>Step 2: Click 'ROLL' button to roll your fate decision if options list is not empty</li>
+                        <li>Step 3: Click the 'NEXT' button to view the fate result</li>
+                      </ol>
+                    </div>
+                    <AddOption handleAddOption={this.handleAddOption} />  
+                    <div style={muiTheme.fateRollButtons}>
+                      <RaisedButton label="ROLL" primary={true} onClick={ this.handleFateOption } disabled={ this.disableRollButton() } style={muiTheme.fateRollButton} />
+                      <RaisedButton label="REMOVE ALL OPTIONS" primary={true} onClick={ this.removeAllOptions } disabled={ this.state.options.length === 0 } style={muiTheme.fateRemoveButton} />
+                    </div>
+                    <Options optionsData={this.state.options} handleRemoveSingleOption={this.handleRemoveSingleOption} />
+                    { (this.state.options.length > 0 && this.state.rollCount <= 0) &&  <div>
+                        <p>Well done!! please click 'NEXT' button to view the final fate random decision ..</p>
+                      </div> }
+                    { this.renderStepActions(1) }
+                  </StepContent>
+                </Step>
 
-            <Step>
-              <StepLabel>View the result(s): </StepLabel>
-              <StepContent>
-              { this.state.rollCount === 0 && <RollResult outputs={this.state.outputs} /> }
-                { this.renderStepActions(2) }
-              </StepContent>
-            </Step>
-          </Stepper>
-          {
-            finished && (
-              <div style={muiTheme.fateRepeatOptionsLayout}>
-                <p style={muiTheme.fateRepeatOptions}>
-                  <a href="###"
-                    onClick={(event) => {
-                      event.preventDefault();
-                      this.setState({stepIndex: 0, finished: false, outputs: [], rollCount: -1});
-                    }}>Click </a> to roll again with existed options.
-                </p>
-                <p style={muiTheme.fateRepeatOR}>OR</p>
-                <p style={muiTheme.fateRepeatOptions}>
-                  <a href="###"
-                    onClick={(event) => {
-                      event.preventDefault();
-                      localStorage.removeItem('options');
-                      this.setState({stepIndex: 0, finished: false, options: [], outputs: [], rollCount: -1});
-                    }}>Click </a> to start a new rolling (without any existed options).
-                </p>
-              </div>
-            )
-          }
+                <Step>
+                  <StepLabel>View the result(s): </StepLabel>
+                  <StepContent>
+                  { this.state.rollCount === 0 && <RollResult outputs={this.state.outputs} /> }
+                    { this.renderStepActions(2) }
+                  </StepContent>
+                </Step>
+              </Stepper>
+              {
+                finished && (
+                  <div style={muiTheme.fateRepeatOptionsLayout}>
+                    <p style={muiTheme.fateRepeatOptions}>
+                      <a href="###"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          this.setState({stepIndex: 0, finished: false, outputs: [], rollCount: -1});
+                        }}>Click </a> to roll again with existed options.
+                    </p>
+                    <p style={muiTheme.fateRepeatOR}>OR</p>
+                    <p style={muiTheme.fateRepeatOptions}>
+                      <a href="###"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          localStorage.removeItem('options');
+                          this.setState({stepIndex: 0, finished: false, options: [], outputs: [], rollCount: -1});
+                        }}>Click </a> to start a new rolling (without any existed options).
+                    </p>
+                  </div>
+                )
+              }
+            </GridTile>
+          </GridList>
         </div>
       </MuiThemeProvider>
     );

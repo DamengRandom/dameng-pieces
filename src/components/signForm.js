@@ -3,8 +3,11 @@ import { firebaseApp } from '../services/firebase';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
-import TextField from 'material-ui/TextField';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+
 const muiTheme = getMuiTheme({
   signContainer: {
     padding: "10% 2%"
@@ -13,6 +16,7 @@ const muiTheme = getMuiTheme({
     padding: "10% 2%"
   }
 });
+
 export default class SignForm extends React.Component {
   constructor(props){
     super(props);
@@ -44,22 +48,44 @@ export default class SignForm extends React.Component {
   onSignIn(){
     const { email, password } = this.state;
     firebaseApp.auth().signInWithEmailAndPassword(email, password)
+      .then(() => {
+        return setTimeout(() => {
+          this.props.history.push('/');
+        }, 300); 
+      })
       .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode == 'auth/invalid-email') {
+          alert('The email address is invalid ..');
+        } else if(errorCode == 'auth/user-not-found'){
+          alert('user has not been found ..');
+        }else {
+          alert(errorMessage);
+        }
+        this.props.history.push('/signin');
         this.setState({ error });
       });
-    return setTimeout(() => {
-      this.props.history.push('/');
-    }, 300); 
   }
   onSignUp(){
     const { email, password } = this.state;
     firebaseApp.auth().createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        return setTimeout(() => {
+          this.props.history.push('/');
+        }, 300); 
+      })
       .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode == 'auth/email-already-in-use') {
+          alert('The email is already in use ..');
+        } else {
+          alert(errorMessage);
+        }
+        this.props.history.push('/signup');
         this.setState({ error });
-      });
-    return setTimeout(() => {
-      this.props.history.push('/');
-    }, 300); 
+      }); 
   }
   render(){
     return (

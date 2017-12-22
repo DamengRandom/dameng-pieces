@@ -9,23 +9,29 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
+
 // import styles 
 import '../index.css';
+
+const adminAccount = 'damonwu0605@gmail.com';
+
 const muiTheme = getMuiTheme({
   palette: {
-    primary1Color: Colors.teal500,
+    primary1Color: '#04a9f4',
     primary2Color: Colors.blue500,
     textColor: Colors.white
   },
   appBar: {
     height: 60,
-    backgroundColor: Colors.teal500
+    backgroundColor: '#04a9f4'
   }
 });
+
 const menuItemStyle = {
-  color: Colors.teal500,
+  color: '#04a9f4',
   cursor: 'pointer'
 };
+
 class Navbar extends React.Component {
   render(){
     return(
@@ -37,6 +43,7 @@ class Navbar extends React.Component {
     );
   }
 }
+
 const HeadeBar = () => (
   <AppBar className="nav-core"
     title="Dameng Pieces"
@@ -44,11 +51,15 @@ const HeadeBar = () => (
     iconElementRight={<NavMenu />}
   />
 );
+
 class NavMenu extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     firebaseApp.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user });
+        if(this.state.user.email === adminAccount){
+          window.localStorage.setItem('admin', adminAccount);
+        }
       } 
     });
   }
@@ -91,10 +102,9 @@ class NavMenu extends React.Component {
   render(){
     return (
       <div className="nav-links">
-        <FlatButton label="Menu" onClick={this.handleToggle} hoverColor={Colors.teal500} />
+        <FlatButton label="Menu" onClick={this.handleToggle} hoverColor={'#04a9f4'} icon={<FontIcon className="material-icons">menu</FontIcon>} />
         { 
           this.state.user ? 
-          
           <Drawer
             docked={false}
             width={240}
@@ -119,7 +129,7 @@ class NavMenu extends React.Component {
                 <FontIcon className="material-icons">live_help</FontIcon>
               }>
             </MenuItem>
-            <MenuItem containerElement={<Link to="/costs" />}
+            { window.localStorage.getItem('admin') === adminAccount && <MenuItem containerElement={<Link to="/costs" />}
               onClick={this.handleClose}
               primaryText="Daily Costs"
               style={menuItemStyle}
@@ -127,16 +137,7 @@ class NavMenu extends React.Component {
                 <FontIcon className="material-icons">monetization_on</FontIcon>
               }
               >
-            </MenuItem>
-            <MenuItem
-              containerElement={<Link to="/words" />}
-              onClick={this.handleClose} 
-              primaryText="Recent Pots" 
-              style={menuItemStyle}
-              leftIcon={
-                <FontIcon className="material-icons">border_color</FontIcon>
-              }>
-            </MenuItem>
+            </MenuItem> }
             <MenuItem
               containerElement={<Link to="/signin" />}
               onClick={this.handleSignOut} 

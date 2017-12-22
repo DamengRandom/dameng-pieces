@@ -2,7 +2,7 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import * as Colors from 'material-ui/styles/colors';
-import {GridList, GridTile} from 'material-ui/GridList';
+import { GridList, GridTile } from 'material-ui/GridList';
 import Dialog from 'material-ui/Dialog';
 import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
@@ -21,18 +21,9 @@ const muiTheme = getMuiTheme({
   },
   tourIcon: {
     position: "relative",
-    top: "5px",
-    left: "-15px",
+    top: "18pt",
+    left: "-9pt",
     float: "right"
-  },
-  popoverText: {
-    paddingLeft: "10px"
-  },
-  popoverIcon: {
-    position: "relative",
-    left: "10px",
-    top: "5px",
-    cursor: "pointer"
   },
   gridList: {
     padding: "10%"
@@ -51,7 +42,7 @@ const muiTheme = getMuiTheme({
     color: Colors.white,
     bottom: "0px",
     padding: "0 10%",
-    backgroundColor: Colors.teal500,
+    backgroundColor: '#04a9f4',
   },
   footerTileTwo: {
     textAlign: "right"
@@ -83,25 +74,15 @@ const muiTheme = getMuiTheme({
   }
 });
 const hi = "Hi there, ";
-const subTitle = "Welcome to dameng pieces, this app recorded latest self-approaches ..";
+const subTitle = "Welcome to dameng pieces, this app recorded latest self-approaches. Technically, this app is built with React + Firebase + Material UI. You may surf the app from menu tab which on the ";
+const location = "top right";
 class HomePageTopSlide extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       open: false
     }
-    // this.handleTouchTap = this.handleTouchTap.bind(this);
     // this.handleRquestClose = this.handleRquestClose.bind(this);
-  }
-  handleTouchTap = (event) => {
-    event.preventDefault();
-    event.persist();
-    this.setState(() => {
-      return {
-        open: true,
-        anchorEl: event.currentTarget
-      }
-    })
   }
   handleRquestClose = () => {
     this.setState(() => {
@@ -114,30 +95,11 @@ class HomePageTopSlide extends React.Component {
     return (
       <div style={muiTheme.container}> 
         <h1>{ hi }</h1> 
-        <h4>{ subTitle }</h4>
-        <FlatButton label="Start tour" 
-          style={muiTheme.tourButton} 
-          onClick={this.handleTouchTap}
-          icon={<FontIcon className="material-icons" style={muiTheme.tourIcon}>touch_app</FontIcon>}
-        />
-        <Popover 
-          open={this.state.open}
-          anchorEl={this.state.anchorEl}
-          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-          targetOrigin={{horizontal: 'left', vertical: 'bottom'}}
-          onRequestClose={this.handleRquestClose}
-          animation={PopoverAnimationVertical}>
-          <Menu>
-            <p style={muiTheme.popoverText}>
-              Start from top menu button ..
-              <FontIcon className="material-icons" 
-                style={muiTheme.popoverIcon} 
-                onClick={this.handleRquestClose}>
-                arrow_forward
-              </FontIcon>
-            </p>
-          </Menu>
-        </Popover>
+        <h4 style={{ "lineHeight": "18pt" }}>
+          { subTitle } 
+          <u>{ location }</u> .. 
+          <FontIcon className="material-icons" style={muiTheme.tourIcon}>touch_app</FontIcon>
+        </h4>
       </div>
     );
   }
@@ -157,6 +119,13 @@ const HomePageMiddleMotto = () => (
         <span style={muiTheme.piecesTitle}>Ideas</span>
       </h3>
       <p>Pieces also reflects some new ideas or new thought about author' <u>thinking</u> and shares ..</p>
+    </GridTile>
+    <GridTile>
+      <h3>
+        <FontIcon className="material-icons" style={muiTheme.piecesIcon}>airplay</FontIcon>
+        <span style={muiTheme.piecesTitle}>Demos</span>
+      </h3>
+      <p><u>Fate</u> is one of the tiny apps author has developed (React App), you find the app in the meau tab (which needs to click the menu button)</p>
     </GridTile>
   </GridList>
 );

@@ -4,7 +4,6 @@ import SignForm from './signForm';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import RaisedButton from 'material-ui/RaisedButton';
-import { EditorFormatAlignCenter } from 'material-ui/svg-icons';
 
 // actions
 import { startLogin } from '../actions/auth';
