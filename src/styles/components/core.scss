@@ -1,0 +1,17 @@
+.core-subheader {
+  height: 100%;
+  padding: 10%;
+  margin: 0;
+  background-image: url('http://res.cloudinary.com/dameng/image/upload/v1514523124/bg02_sjneye.jpg');
+  background-position: center;
+  background-size: cover;
+  h1, h4 {
+    color: #fff;
+  }
+  h4 {
+    line-height: 18pt;
+    .material-icons {
+      color: #fff;
+    }
+  }
+}

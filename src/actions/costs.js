@@ -10,7 +10,7 @@ export const addCost = (cost) => {
 
 // keep adding new costs into the store constantly (startAddCost: is called as action function)
 export const startAddCost = (costData = {}) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     const {
       costId = null,
       costTitle = null, 
@@ -18,8 +18,10 @@ export const startAddCost = (costData = {}) => {
       costNote = null,
       costDate = null
     } = costData;
+    const userId = getState().auth.uid;
+    console.log("uid: ", userId);
     const eachCost = { costId: uuid(), costTitle, costAmount, costNote, costDate }
-    firebaseApp.database().ref('costs').push(eachCost).then((snapshot) => {
+    firebaseApp.database().ref(`users/${userId}/costs`).push(eachCost).then((snapshot) => {
       dispatch(addCost({
         id: snapshot.key,
         ...eachCost
@@ -38,8 +40,9 @@ export const editCost = (id, updates) => {
 }
 
 export const startEditCost = (id, updates) => {
-  return (dispatch) => {
-    return firebaseApp.database().ref(`costs/${id}`).update(updates).then(() => {
+  return (dispatch, getState) => {
+    const userId = getState().auth.uid;
+    return firebaseApp.database().ref(`users/${userId}/costs/${id}`).update(updates).then(() => {
       dispatch(editCost(id, updates));
     })
   }
@@ -54,8 +57,9 @@ export const removeCost = ({id} = {}) => {
 }
 
 export const startRemoveCost = ({id} = {}) => {
-  return (dispatch) => {
-    return firebaseApp.database().ref(`costs/${id}`).remove().then(() => {
+  return (dispatch, getState) => {
+    const userId = getState().auth.uid;
+    return firebaseApp.database().ref(`users/${userId}/costs/${id}`).remove().then(() => {
       dispatch(removeCost({id}))
     })
   }
@@ -70,8 +74,9 @@ export const setCosts = (costs) => {
 }
 
 export const startSetCosts = () => {
-  return (dispatch) => {
-    return firebaseApp.database().ref('costs').once('value').then((snapshot) => {
+  return (dispatch, getState) => {
+    const userId = getState().auth.uid;
+    return firebaseApp.database().ref(`users/${userId}/costs`).once('value').then((snapshot) => {
       const costs = [];
       snapshot.forEach((childSnapshot) => {
         costs.push({

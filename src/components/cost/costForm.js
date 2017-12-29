@@ -23,7 +23,7 @@ class CostForm extends React.Component {
   }
   getCostTitle = (event) => {
     const costTitle = event.target.value;
-    // this.setState({ costTitle }); // secodn way of writing setState cost title
+    // this.setState({ costTitle }); // second way of writing setState cost title
     this.setState(() => {
       return {
         costTitle
@@ -33,7 +33,7 @@ class CostForm extends React.Component {
   getCostAmount = (event) => {
     const costAmount = event.target.value;
     this.setState({ costAmount });
-  }
+  } 
   getCostNote = (event) => {
     const costNote = event.target.value;
     this.setState({ costNote });

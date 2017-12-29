@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { firebaseApp } from './services/firebase';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
-// import redux store
+// redux store
 import configureStore from './store/configureStore';
-// import routes
+// routes
 import Routes from './routes/routes';
-// import actions
+// actions
+import { login, logout } from './actions/auth';
 import { startSetCosts } from './actions/costs';
 
 const store = configureStore();
@@ -18,9 +20,22 @@ const Output = (
   </Provider>
 );
 
-ReactDOM.render(<p>Loading ..</p>, document.getElementById('root'));
-store.dispatch(startSetCosts()).then(() => {
-  ReactDOM.render(Output, document.getElementById('root'));  
-})
+// ReactDOM.render(<p>Loading ..</p>, document.getElementById('root'));
+// store.dispatch(startSetCosts()).then(() => {
+  // ReactDOM.render(Output, document.getElementById('root'));  
+// })
+
+ReactDOM.render(Output, document.getElementById('root'));  
+
+firebaseApp.auth().onAuthStateChanged((user) => {
+  if(user){
+    console.log("Logged in ..", user.uid);
+    store.dispatch(login(user.uid));
+    store.dispatch(startSetCosts());
+  }else {
+    console.log("Logged out ..");
+    store.dispatch(logout());
+  }
+});
 
 registerServiceWorker();
