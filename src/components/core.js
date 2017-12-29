@@ -9,12 +9,6 @@ import Menu from 'material-ui/Menu';
 import FlatButton from 'material-ui/FlatButton';
 import FontIcon from 'material-ui/FontIcon';
 const muiTheme = getMuiTheme({
-  container: {
-    height: "100%",
-    padding: "10%",
-    margin: "0",
-    backgroundColor: Colors.amber50
-  },
   tourButton: {
     display: "block",
     margin: "0 auto"
@@ -23,7 +17,8 @@ const muiTheme = getMuiTheme({
     position: "relative",
     top: "18pt",
     left: "-9pt",
-    float: "right"
+    float: "right",
+    color: "#fff"
   },
   gridList: {
     padding: "10%"
@@ -93,9 +88,9 @@ class HomePageTopSlide extends React.Component {
   }
   render(){
     return (
-      <div style={muiTheme.container}> 
+      <div className="core-subheader"> 
         <h1>{ hi }</h1> 
-        <h4 style={{ "lineHeight": "18pt" }}>
+        <h4>
           { subTitle } 
           <u>{ location }</u> .. 
           <FontIcon className="material-icons" style={muiTheme.tourIcon}>touch_app</FontIcon>

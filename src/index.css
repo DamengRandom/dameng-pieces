@@ -13,3 +13,18 @@ body {
   display: flex;
   align-items: center;
 }
+
+/* imported css */
+.core-subheader {
+  height: 100%;
+  padding: 10%;
+  margin: 0;
+  background-image: url("http://res.cloudinary.com/dameng/image/upload/v1514523124/bg02_sjneye.jpg");
+  background-position: center;
+  background-size: cover; }
+  .core-subheader h1, .core-subheader h4 {
+    color: #fff; }
+  .core-subheader h4 {
+    line-height: 18pt; }
+    .core-subheader h4 .material-icons {
+      color: #fff; }
