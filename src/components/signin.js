@@ -21,6 +21,7 @@ const muiTheme = getMuiTheme({
 class Signin extends React.Component {
   googleSignIn = () => {
     this.props.startLogin();
+    // console.log("login data: ", this.props.startLogin());
     this.props.history.push('/');
   }
   render(){

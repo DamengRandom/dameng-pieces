@@ -24,6 +24,7 @@ const muiTheme = getMuiTheme({
 class Costs extends React.Component {
   constructor(props){
     super(props);
+    // console.log('user Id: ', this.props.auth.uid);
   }
   renderCosts(){
     if(this.props.costs.length !== 0){
@@ -59,7 +60,9 @@ class Costs extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  // console.log("auth: ", state.auth);
   return {
+    auth: state.auth,
     costs: state.costs // retrieve all the costs data from store
   }
 }

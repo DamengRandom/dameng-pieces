@@ -9,6 +9,7 @@ import configureStore from './store/configureStore';
 // routes
 import Routes from './routes/routes';
 // actions
+import { login, logout } from './actions/auth';
 import { startSetCosts } from './actions/costs';
 
 const store = configureStore();
@@ -28,12 +29,12 @@ ReactDOM.render(Output, document.getElementById('root'));
 
 firebaseApp.auth().onAuthStateChanged((user) => {
   if(user){
-    console.log("Logged in ..");
-    if(user.email === 'damonwu0605@gmail.com') {
-      store.dispatch(startSetCosts());
-    }
+    console.log("Logged in ..", user.uid);
+    store.dispatch(login(user.uid));
+    store.dispatch(startSetCosts());
   }else {
     console.log("Logged out ..");
+    store.dispatch(logout());
   }
 });
 

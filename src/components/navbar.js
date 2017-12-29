@@ -13,8 +13,6 @@ import FontIcon from 'material-ui/FontIcon';
 // import styles 
 import '../index.css';
 
-const adminAccount = 'damonwu0605@gmail.com';
-
 const muiTheme = getMuiTheme({
   palette: {
     primary1Color: '#04a9f4',
@@ -57,9 +55,9 @@ class NavMenu extends React.Component {
     firebaseApp.auth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user });
-        if(this.state.user.email === adminAccount){
-          window.localStorage.setItem('admin', adminAccount);
-        }
+        // if(this.state.user.email === adminAccount){
+          window.localStorage.setItem('currentUser', this.state.user.id);
+        // }
       } 
     });
   }
@@ -100,6 +98,7 @@ class NavMenu extends React.Component {
     firebaseApp.auth().signOut();
   }
   render(){
+    const userId = window.localStorage.getItem('currentUser');
     return (
       <div className="nav-links">
         <FlatButton label="Menu" onClick={this.handleToggle} hoverColor={'#04a9f4'} icon={<FontIcon className="material-icons">menu</FontIcon>} />
@@ -129,7 +128,7 @@ class NavMenu extends React.Component {
                 <FontIcon className="material-icons">live_help</FontIcon>
               }>
             </MenuItem>
-            { window.localStorage.getItem('admin') === adminAccount && <MenuItem containerElement={<Link to="/costs" />}
+            <MenuItem containerElement={<Link to={`/costs`} />}
               onClick={this.handleClose}
               primaryText="Daily Costs"
               style={menuItemStyle}
@@ -137,7 +136,7 @@ class NavMenu extends React.Component {
                 <FontIcon className="material-icons">monetization_on</FontIcon>
               }
               >
-            </MenuItem> }
+            </MenuItem>
             <MenuItem
               containerElement={<Link to="/signin" />}
               onClick={this.handleSignOut} 
@@ -179,4 +178,5 @@ class NavMenu extends React.Component {
     );
   }
 }
+
 export default Navbar;

@@ -2,7 +2,7 @@ import React from 'react';
 // import { Router, Route, Switch } from 'react-router';
 import { Router, Route } from 'react-router-dom'; 
 import createBrowserHistory from 'history/createBrowserHistory';
-// import components
+// components
 import Navbar from '../components/navbar';
 // import App from '../App';
 import Core from '../components/core';
@@ -34,4 +34,5 @@ class Routes extends React.Component {
     );
   }
 }
+
 export default Routes;
